@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183c23">
+  <meta name="description" content="Una pequeña aventura para encontrar recuerdos y momentos compartidos.">
+  <title>Aventura de recuerdos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="intro">
+      <p class="eyebrow">UNA PEQUEÑA AVENTURA</p>
+      <h1>Un mapa lleno de recuerdos</h1>
+      <p>Explora el jardín, acércate a cada objeto y pulsa <kbd>E</kbd> para descubrir su recuerdo.</p>
+    </header>
+
+    <section class="game-shell" aria-label="Juego de recuerdos">
+      <canvas id="game" width="960" height="540" aria-label="Mapa del juego. Usa WASD o las flechas para moverte y E para interactuar."></canvas>
+      <div class="touch-controls" aria-label="Controles táctiles">
+        <div class="direction-pad">
+          <button type="button" data-key="ArrowUp" aria-label="Arriba">▲</button>
+          <div>
+            <button type="button" data-key="ArrowLeft" aria-label="Izquierda">◀</button>
+            <button type="button" data-key="ArrowDown" aria-label="Abajo">▼</button>
+            <button type="button" data-key="ArrowRight" aria-label="Derecha">▶</button>
+          </div>
+        </div>
+        <button type="button" class="interact-button" id="interact">Interactuar</button>
+      </div>
+    </section>
+    <footer>Hecho con cariño · Controles: WASD / flechas · Interactuar: E</footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
