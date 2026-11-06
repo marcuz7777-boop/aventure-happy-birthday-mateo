@@ -5,20 +5,23 @@
   const ctx = canvas.getContext('2d');
   ctx.imageSmoothingEnabled = false;
 
-  const W = canvas.width;
-  const H = canvas.height;
+  // El arte se dibuja en coordenadas 960x540 y se adapta al viewport nativo 1024x680.
+  const W = 960;
+  const H = 540;
+  ctx.scale(canvas.width / W, canvas.height / H);
+
   const groundBottom = 405;
   const keys = new Set();
   const player = { x: 82, y: 350, speed: 2.5 };
-  let message = 'Explora el mapa. Acércate a los objetos y pulsa E.';
-  let messageUntil = 0;
-  let found = 0;
+  let message = '¡Ya encontraste 3 recuerdos! Solo falta Videojuegos.';
+  let messageUntil = Infinity;
+  let found = 3;
 
   const objectives = [
-    { name: 'Árbol', x: 205, y: 180, visited: false, kind: 'tree', memory: 'Aquí comenzó una historia que todavía recuerdo con una sonrisa.' },
+    { name: 'Árbol', x: 205, y: 180, visited: true, kind: 'tree', memory: 'Aquí comenzó una historia que todavía recuerdo con una sonrisa.' },
     { name: 'Videojuegos', x: 700, y: 205, visited: false, kind: 'computer', memory: 'Las partidas y las risas siempre hacen buenos recuerdos.' },
-    { name: 'Series', x: 700, y: 330, visited: false, kind: 'tv', memory: 'Una serie compartida puede convertirse en una tradición.' },
-    { name: 'Chistes', x: 460, y: 320, visited: false, kind: 'smile', memory: 'Algunos chistes son malos… pero igual nos hacen reír.' }
+    { name: 'Series', x: 700, y: 330, visited: true, kind: 'tv', memory: 'Una serie compartida puede convertirse en una tradición.' },
+    { name: 'Chistes', x: 460, y: 320, visited: true, kind: 'smile', memory: 'Algunos chistes son malos… pero igual nos hacen reír.' }
   ];
 
   const flowers = [];
@@ -46,13 +49,6 @@
   function rect(x, y, w, h, color) {
     ctx.fillStyle = color;
     ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
-  }
-
-  function circle(x, y, r, color) {
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(x, y, r, 0, Math.PI * 2);
-    ctx.fill();
   }
 
   function text(value, x, y, size, color, weight = '600', align = 'left') {
